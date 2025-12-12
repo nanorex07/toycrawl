@@ -1,5 +1,6 @@
 CC = clang
-CFLAGS = -Wall -Wextra -pedantic -I../commons -Isrc -Isrc/parser
+CFLAGS = -Wall -Wextra -pedantic -I../commons -Isrc -Isrc/parser -I/opt/homebrew/opt/lexbor/include
+LDFLAGS = -L/opt/homebrew/opt/lexbor/lib -llexbor
 
 COMMONS_SRCS := $(wildcard ../commons/*.c)
 MAIN_SRCS := $(wildcard src/*.c)
@@ -12,7 +13,7 @@ TARGET = crawler
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
