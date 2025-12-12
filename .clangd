@@ -1,0 +1,9 @@
+CompileFlags:
+  Add:
+    - -I../../commons
+    - -I../../../commons
+    - -Iparser
+    - -I/opt/homebrew/opt/lexbor/include
+  Remove:
+    - -W*
+

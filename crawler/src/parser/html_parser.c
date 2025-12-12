@@ -38,10 +38,9 @@ void parse_file(char *filename, char* output_folder, html_parser *parser) {
             break;
         }
         scanned += read;
-
         lxb_html_document_parse_chunk(document, batch, read);
-       
     }
+
 
     fclose(fp);
 }
