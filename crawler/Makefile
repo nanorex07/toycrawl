@@ -1,19 +1,30 @@
 CC = clang
-CFLAGS = -Wall -Wextra -pedantic -I../commons -Isrc -Isrc/parser -I/opt/homebrew/opt/lexbor/include
-LDFLAGS = -L/opt/homebrew/opt/lexbor/lib -llexbor
+CFLAGS = -Wall -Wextra -pedantic -I../commons -Isrc -Isrc/parser -Isrc/net -Isrc/frontier
+LIBXML_FLAGS= -lxml2
+LIBCURL_FLAGS= -lcurl
+
 
 COMMONS_SRCS := $(wildcard ../commons/*.c)
 MAIN_SRCS := $(wildcard src/*.c)
 PARSER_SRCS := $(wildcard src/parser/*.c)
-SRCS = $(COMMONS_SRCS) $(MAIN_SRCS) $(PARSER_SRCS)
+NET_SRCS := $(wildcard src/net/*.c)
+FRNTR_SRCS := $(wildcard src/frontier/*.c)
+SRCS = $(COMMONS_SRCS) $(MAIN_SRCS) $(PARSER_SRCS) $(NET_SRCS) $(FRNTR_SRCS)
 OBJS = $(SRCS:.c=.o)
 
-TARGET = crawler
+FORMAT_FILES := $(shell find . \
+	\( -name "*.c" -o -name "*.h" \))
+
+BUILD_DIR := ../build
+TARGET := $(BUILD_DIR)/crawler
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+$(TARGET): $(OBJS) | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBXML_FLAGS) $(LIBCURL_FLAGS)
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -26,4 +37,7 @@ clean-objs:
 
 build: all clean-objs
 
-.PHONY: all clean clean-objs build-clean
+format:
+	clang-format -style="{BasedOnStyle: LLVM, IndentWidth: 4, TabWidth: 4, UseTab: Never}" -i $(FORMAT_FILES)
+
+.PHONY: all clean clean-objs build-clean format
