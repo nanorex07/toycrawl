@@ -3,7 +3,7 @@ CompileFlags:
     - -I../../commons
     - -I../../../commons
     - -Iparser
-    - -I/opt/homebrew/opt/lexbor/include
+    - -Inet
+    - -Ifrontier
   Remove:
     - -W*
-

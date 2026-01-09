@@ -1,2 +1,5 @@
 /storage
 test.*
+/test*
+/build
+.DS_Store

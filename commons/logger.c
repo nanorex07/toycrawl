@@ -1,19 +1,31 @@
 #include "logger.h"
 
-#define COLOR_RESET   "\033[0m"
-#define COLOR_RED     "\033[31m"
-#define COLOR_GREEN   "\033[32m"
-#define COLOR_YELLOW  "\033[33m"
-
-void log_info(char *message) {
-    printf("%s[INFO] | %s%s\n", COLOR_GREEN, message, COLOR_RESET);
+static void vlog_with_prefix(const char *color, const char *prefix, const char *fmt, va_list ap) {
+    printf("%s%s | ", color, prefix);
+    vprintf(fmt, ap);
+    printf("%s\n", COLOR_RESET);
 }
 
-void log_warning(char *message) {
-    printf("%s[WARNING] | %s%s\n", COLOR_YELLOW, message, COLOR_RESET);
+void log_info(const char *fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    vlog_with_prefix(COLOR_GREEN, "[INFO]", fmt, ap);
+    va_end(ap);
 }
 
-void log_error(char *message) {
-    printf("%s[ERROR] | %s%s\n", COLOR_RED, message, COLOR_RESET);
+void log_warning(const char *fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    vlog_with_prefix(COLOR_YELLOW, "[WARNING]", fmt, ap);
+    va_end(ap);
 }
 
+void log_error(const char *fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    vlog_with_prefix(COLOR_RED, "[ERROR]", fmt, ap);
+    va_end(ap);
+}
