@@ -1,11 +1,10 @@
 #ifndef FRONTIER_H
 #define FRONTIER_H
 
-#include "stdio.h"
 #include "utils.h"
+#include "stdio.h"
 #include <stdint.h>
 #include <stdlib.h>
-#include "logger.h"
 #include <string.h>
 #include <stdbool.h>
 

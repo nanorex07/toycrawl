@@ -1,9 +1,13 @@
 CompileFlags:
   Add:
-    - -I../../commons
-    - -I../../../commons
-    - -Iparser
-    - -Inet
-    - -Ifrontier
+    - -I.
+    - -I../commons
+    - -I../parser
+    - -I../net
+    - -I../frontier
+    - -I./commons
+    - -I./parser
+    - -I./net
+    - -I./frontier
   Remove:
     - -W*

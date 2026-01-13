@@ -21,7 +21,7 @@ int include_url(const char *url) {
     size_t size = strlen(url);
     if (!size)
         return 0;
-    return string_starts_with(url, "/") || string_starts_with(url, "https://");
+    return string_starts_with(url, "https://");
 }
 
 void walk(xmlNode *node, html_parser *parser) {
