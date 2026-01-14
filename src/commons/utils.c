@@ -1,8 +1,8 @@
 #include "utils.h"
 #include <stdio.h>
 
-FILE* open_file_with_error(const char *filename, char *mode) {
-    FILE* fp = fopen(filename, mode);
+FILE *open_file_with_error(const char *filename, char *mode) {
+    FILE *fp = fopen(filename, mode);
 
     if (fp == NULL) {
         log_error("unable to open file, %s", filename);
@@ -10,9 +10,10 @@ FILE* open_file_with_error(const char *filename, char *mode) {
     return fp;
 }
 
-FILE* open_create_file(const char *filename, char *mode) {
-    FILE* fp = fopen(filename, mode);
-    if (fp!=NULL) return fp;
+FILE *open_create_file(const char *filename, char *mode) {
+    FILE *fp = fopen(filename, mode);
+    if (fp != NULL)
+        return fp;
 
     fp = fopen(filename, "w");
     if (fp == NULL) {
@@ -28,7 +29,7 @@ FILE* open_create_file(const char *filename, char *mode) {
     return fp;
 }
 
-int string_starts_with(const char* str, const char* prefix) {
+int string_starts_with(const char *str, const char *prefix) {
     if (strlen(str) < strlen(prefix)) {
         return 0;
     }
@@ -42,7 +43,7 @@ void write_uintN_le(uint8_t *buf, size_t x, int n) {
 
 size_t read_uintN_le(const uint8_t *buf, int n) {
     size_t x = 0;
-    for (int i = n-1; i >= 0; i--)
+    for (int i = n - 1; i >= 0; i--)
         x = (x << 8) | buf[i];
     return x;
 }

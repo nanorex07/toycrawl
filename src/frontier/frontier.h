@@ -1,12 +1,12 @@
 #ifndef FRONTIER_H
 #define FRONTIER_H
 
-#include "utils.h"
 #include "stdio.h"
+#include "utils.h"
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 #define FRNTR_LOG_FILENAME "frontier.log"
 #define FRNTR_OFFSET_FILENAME "frontier.offset"

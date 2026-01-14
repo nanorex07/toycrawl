@@ -1,11 +1,13 @@
 CompileFlags:
   Add:
     - -I.
+    - -I../lookup
     - -I../commons
     - -I../parser
     - -I../net
     - -I../frontier
     - -I./commons
+    - -I./lookup
     - -I./parser
     - -I./net
     - -I./frontier

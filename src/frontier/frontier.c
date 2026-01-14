@@ -96,7 +96,7 @@ frontier_item *_copy_frontier_item(frontier_item *item) {
     copy->depth = item->depth;
     copy->url_len = item->url_len;
     copy->url_hash = item->url_hash;
-    copy->url = malloc(sizeof(char)*item->url_len);
+    copy->url = malloc(sizeof(char) * item->url_len);
     strncpy(copy->url, item->url, item->url_len);
     return copy;
 }
