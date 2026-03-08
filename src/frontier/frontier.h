@@ -18,7 +18,7 @@
 
 typedef struct {
     uint8_t depth;
-    uint32_t url_len;
+    uint16_t url_len;
     uint64_t url_hash;
     char *url;
 } frontier_item;

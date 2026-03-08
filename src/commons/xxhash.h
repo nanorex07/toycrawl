@@ -1171,11 +1171,12 @@ XXH64_hashFromCanonical(XXH_NOESCAPE const XXH64_canonical_t *src);
 #define XXH_SSE2 1   /*!< SSE2 for Pentium 4, Opteron, all x86_64. */
 #define XXH_AVX2 2   /*!< AVX2 for Haswell and Bulldozer */
 #define XXH_AVX512 3 /*!< AVX512 for Skylake and Icelake */
-#define XXH_NEON 4   /*!< NEON for most ARMv7-A, all AArch64, and WASM SIMD128 \
-                      */
-#define XXH_VSX 5    /*!< VSX and ZVector for POWER8/z13 (64-bit) */
-#define XXH_SVE 6    /*!< SVE for some ARMv8-A and ARMv9-A */
-#define XXH_LSX 7    /*!< LSX (128-bit SIMD) for LoongArch64 */
+#define XXH_NEON                                                               \
+    4             /*!< NEON for most ARMv7-A, all AArch64, and WASM SIMD128    \
+                   */
+#define XXH_VSX 5 /*!< VSX and ZVector for POWER8/z13 (64-bit) */
+#define XXH_SVE 6 /*!< SVE for some ARMv8-A and ARMv9-A */
+#define XXH_LSX 7 /*!< LSX (128-bit SIMD) for LoongArch64 */
 
 /*-**********************************************************************
  *  XXH3 64-bit variant
@@ -4245,7 +4246,7 @@ typedef uint64x2_t xxh_aliasing_uint64x2_t XXH_ALIASING;
  */
 #if defined(__aarch64__) && defined(__GNUC__) && !defined(__clang__)
 XXH_FORCE_INLINE
-    uint64x2_t XXH_vld1q_u64(void const *ptr) /* silence -Wcast-align */
+uint64x2_t XXH_vld1q_u64(void const *ptr) /* silence -Wcast-align */
 {
     return *(xxh_aliasing_uint64x2_t const *)ptr;
 }
@@ -4532,12 +4533,14 @@ static const xxh_u8 XXH3_kSecret[XXH_SECRET_DEFAULT_SIZE] = {
     0x95, 0x16, 0x04, 0x28, 0xaf, 0xd7, 0xfb, 0xca, 0xbb, 0x4b, 0x40, 0x7e,
 };
 
-static const xxh_u64 PRIME_MX1 = 0x165667919E3779F9ULL; /*!<
-                                                           0b0001011001010110011001111001000110011110001101110111100111111001
-                                                         */
-static const xxh_u64 PRIME_MX2 = 0x9FB21C651E98DF25ULL; /*!<
-                                                           0b1001111110110010000111000110010100011110100110001101111100100101
-                                                         */
+static const xxh_u64 PRIME_MX1 =
+    0x165667919E3779F9ULL; /*!<
+                              0b0001011001010110011001111001000110011110001101110111100111111001
+                            */
+static const xxh_u64 PRIME_MX2 =
+    0x9FB21C651E98DF25ULL; /*!<
+                              0b1001111110110010000111000110010100011110100110001101111100100101
+                            */
 
 #ifdef XXH_OLD_NAMES
 #define kSecret XXH3_kSecret
