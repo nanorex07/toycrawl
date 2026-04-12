@@ -15,6 +15,17 @@
 
 #define MAX_FILE_NAME_LENGTH 200
 
+#define DA_APPEND(ARRAY, VAL)                                                  \
+    do {                                                                       \
+        if (ARRAY->count >= ARRAY->capacity) {                                 \
+            ARRAY->capacity =                                                  \
+                (ARRAY->capacity == 0) ? 1 : ARRAY->capacity * 2;              \
+            ARRAY->items = (typeof(ARRAY->items))realloc(                      \
+                ARRAY->items, sizeof(*ARRAY->items) * ARRAY->capacity);        \
+        }                                                                      \
+        ARRAY->items[ARRAY->count++] = VAL;                                    \
+    } while (0)
+
 FILE *open_file_with_error(const char *filename, char *mode);
 FILE *open_create_file(const char *filename, char *mode);
 
